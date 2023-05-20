@@ -1,6 +1,5 @@
 {
   "name": "client",
-  "homepage": "https://Chandrasekhar2020.github.io/lib_frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

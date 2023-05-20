@@ -1,7 +1,7 @@
 import axios from "axios"
 
 import { isAdminAuth } from "./admin";
-const API_URL="http://library-management-eawgfkg0e-chandrasekhar2020.vercel.app/"
+const API_URL="https://library-management-eawgfkg0e-chandrasekhar2020.vercel.app/"
 
 export const getCart = (props) =>{
     return axios.get(`${API_URL}/users/book/borrowed/${props.regno}`)
