@@ -1,6 +1,6 @@
 import axios from "axios";
 import { isAdminAuth } from "./admin";
-const API_URL="https://library-management-eawgfkg0e-chandrasekhar2020.vercel.app"
+const API_URL="https://lib-api-t2nm.onrender.com"
 export const getBooks = ()=>{
    if(isAdminAuth()){
       console.log(isAdminAuth().token);
