@@ -8,7 +8,7 @@ import "../signin.css";
      const [msg,setmsg] = useState("");
      const Submit = (e) =>{
        let refno = e.target[0].value;
-       axios.delete(`http://localhost:8000/admin/book/${refno}`,{headers:{Authorization:`Bearer ${isAdminAuth().token}`}})
+       axios.delete(`https://lib-api-t2nm.onrender.com/admin/book/${refno}`,{headers:{Authorization:`Bearer ${isAdminAuth().token}`}})
        .then((resp)=>{
         console.log(resp);
         if(resp.data.err){
