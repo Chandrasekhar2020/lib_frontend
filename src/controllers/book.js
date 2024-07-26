@@ -1,10 +1,10 @@
 import axios from "axios";
 import { isAdminAuth } from "./admin";
-const API_URL="https://lib-api-t2nm.onrender.com"
+
 export const getBooks = ()=>{
    if(isAdminAuth()){
       console.log(isAdminAuth().token);
-      return axios.get(`${API_URL}/admin/book`,{
+      return axios.get(`${process.env.REACT_APP_API_URL}admin/book`,{
        headers:{ Authorization:`Bearer ${isAdminAuth().token}` }
       }).
       then((resp)=>{
@@ -12,7 +12,7 @@ export const getBooks = ()=>{
       })
    }
    else{
-        return  axios.get(`${API_URL}/users/book/`).then((resp)=>{
+        return  axios.get(`${process.env.REACT_APP_API_URL}users/book/`).then((resp)=>{
             return resp.data.resp;
 
          })
@@ -23,7 +23,7 @@ export const getBooks = ()=>{
       }
 };
 export const addBook = (book) =>{
-   return axios.post(`${API_URL}/admin/book/`,book,{headers:{Authorization:`Bearer ${isAdminAuth().token}`}}).then((resp)=>{
+   return axios.post(`${process.env.REACT_APP_API_URL}admin/book/`,book,{headers:{Authorization:`Bearer ${isAdminAuth().token}`}}).then((resp)=>{
      
       return resp;
    })
@@ -34,7 +34,7 @@ export const addBook = (book) =>{
 
 };
 export const getBookDetail = (props) =>{
-   return axios.get(`${API_URL}/users/book/${props}`).then((resp)=>{
+   return axios.get(`${process.env.REACT_APP_API_URL}users/book/${props}`).then((resp)=>{
       return resp.data.book;
       
    })
@@ -44,7 +44,7 @@ export const getBookDetail = (props) =>{
 }
 export const BookManage = (book) =>{
   if(book.take==1){
-    return axios.put(`${API_URL}/admin/take/${book.ref_no}/${book.reg_no}`,
+    return axios.put(`${process.env.REACT_APP_API_URL}admin/take/${book.ref_no}/${book.reg_no}`,
     {},{headers:{Authorization:`Bearer ${isAdminAuth().token}`}})
     .then((resp)=>{
       return resp;
@@ -55,7 +55,7 @@ export const BookManage = (book) =>{
 
   }
   else{
-   return axios.put(`${API_URL}/admin/give/${book.ref_no}/${book.reg_no}`,{}
+   return axios.put(`${process.env.REACT_APP_API_URL}admin/give/${book.ref_no}/${book.reg_no}`,{}
    ,{headers:{Authorization:`Bearer ${isAdminAuth().token}`}})
    .then((resp)=>{
       return resp;

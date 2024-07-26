@@ -1,10 +1,10 @@
 import axios from "axios"
 
 import { isAdminAuth } from "./admin";
-const API_URL="https://lib-api-t2nm.onrender.com"
+
 
 export const getCart = (props) =>{
-    return axios.get(`${API_URL}/users/book/borrowed/${props.regno}`)
+    return axios.get(`${process.env.REACT_APP_API_URL}users/book/borrowed/${props.regno}`)
     .then((resp)=>{
        console.log(resp);
     })
@@ -16,7 +16,7 @@ export const signIn = (props) =>{
     let to="user";
     if(props.isuser==0){to="admin";}
     
-    return  axios.post(`${API_URL}/signin/${to}/`,{
+    return  axios.post(`${process.env.REACT_APP_API_URL}signin/${to}/`,{
         gmail:props.gmail,
         password:props.password
     })
@@ -36,7 +36,7 @@ export const isUserAuth = () =>{
 }
 export const getUser = () =>{
     if(isAdminAuth()){
-        return axios.get(`${API_URL}/admin/admin`,{
+        return axios.get(`${process.env.REACT_APP_API_URL}admin/admin`,{
             
         },
         {
@@ -49,7 +49,7 @@ export const getUser = () =>{
             console.log(err);
         })
     }
-    return axios.get(`${API_URL}/users/user/${isUserAuth().user.reg_no}`).then((resp)=>{
+    return axios.get(`${process.env.REACT_APP_API_URL}users/user/${isUserAuth().user.reg_no}`).then((resp)=>{
         return resp;
     })
     .catch((err)=>{
@@ -59,7 +59,7 @@ export const getUser = () =>{
 
 }
 export const updateUser = (obj) =>{
-    return axios.put(`${API_URL}/users/update`,{
+    return axios.put(`${process.env.REACT_APP_API_URL}users/update`,{
         obj
     },{headers:{
         Authorization:`Bearer ${isUserAuth().token}`
@@ -79,7 +79,7 @@ export const  createUser = (user) =>{
     let isstu ="user";
     if(user.isuser==0){isstu="admin";user.reg_no=undefined;}
     console.log(user);
-     return axios.post(`${API_URL}/signup/${isstu}/new`,{
+     return axios.post(`${process.env.REACT_APP_API_URL}signup/${isstu}/new`,{
       name:user.name,
       gmail:user.gmail,
       reg_no:user.reg_no,
@@ -94,7 +94,7 @@ export const  createUser = (user) =>{
 }
 export const forgotPassword = (data)=>{
     if(data.admin){
-        return axios.post(`${API_URL}/forgot/admin/${data.token}`,
+        return axios.post(`${process.env.REACT_APP_API_URL}forgot/admin/${data.token}`,
         {
            password:data.password
         }
@@ -107,7 +107,7 @@ export const forgotPassword = (data)=>{
         })
     }
     else{
-        return axios.post(`${API_URL}/forgot/user/${data.token}`,
+        return axios.post(`${process.env.REACT_APP_API_URL}forgot/user/${data.token}`,
         {
             password:data.password
         }
@@ -125,7 +125,7 @@ export const forgotPassword = (data)=>{
 
 export const forgotPass = (data)=>{
     if(data.admin){
-        return axios.post(`${API_URL}/forgot/admin/new/`,
+        return axios.post(`${process.env.REACT_APP_API_URL}forgot/admin/new/`,
         {
             gmail:data.gmail
         }
@@ -138,7 +138,7 @@ export const forgotPass = (data)=>{
         })
     }
     else{
-        return axios.post(`${API_URL}/forgot/user/new/`,
+        return axios.post(`${process.env.REACT_APP_API_URL}forgot/user/new/`,
         {
            gmail:data.gmail
         }
